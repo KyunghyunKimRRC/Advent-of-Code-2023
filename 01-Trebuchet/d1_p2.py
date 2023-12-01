@@ -34,30 +34,24 @@ def main():
             'eight': '8',
             'nine': '9'
         }
-        print("Before Change Line: " + line)
-        temp_line = line
+        norm_line = line
         for i in range(len(line) - 4):
-            substring = line[i:i+5]
+            substring = norm_line[i:i+5]
             for word, number in word_to_number.items():
                 if word in substring:
-                    line = line.replace(word, number)
-        print("After Change Line: " + line)
-        reversed_line = temp_line[::-1]
-        print("Reversed Before Change: " + reversed_line)
+                    norm_line = norm_line.replace(word, number)
+        reversed_line = line[::-1]
         for i in range(len(reversed_line) - 4):
             substring = reversed_line[i:i+5]
             for word, number in word_to_number.items():
                 if word[::-1] in substring:
                     reversed_line = reversed_line.replace(word[::-1], number)
-        print("Reversed After Change: " + reversed_line)
         while first_digit is None and second_digit is None:
-            for front_char in line:
+            for front_char, back_char in zip(norm_line, reversed_line):
                 if front_char.isdigit() and first_digit is None:
                     first_digit = front_char
-            for back_char in reversed_line:
                 if back_char.isdigit() and second_digit is None:
                     second_digit = back_char
-        print(first_digit + second_digit)
         result += int(first_digit + second_digit)
     print(result)
 

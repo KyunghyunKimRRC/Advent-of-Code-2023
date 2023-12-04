@@ -37,5 +37,5 @@ for line in lines:
 
 for key, value in copies.items():
     total_cards += value
-total_cards += 192
+total_cards += len(lines)
 print(total_cards)
